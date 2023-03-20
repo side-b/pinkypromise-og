@@ -4,10 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "pnpm build-viem-client && next build",
+    "build": "pnpm viem-client:build && next build",
     "start": "next start",
     "lint": "next lint",
-    "build-viem-client": "cd viem-client && pnpm build"
+    "postinstall": "pnpm viem-client:install",
+    "viem-client:build": "cd viem-client && pnpm build",
+    "viem-client:install": "cd viem-client && pnpm install"
   },
   "dependencies": {
     "@types/node": "18.15.3",
