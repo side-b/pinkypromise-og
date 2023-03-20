@@ -1,0 +1,22 @@
+{
+  "name": "viem-client",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "module": "dist/viem-client.js",
+  "main": "dist/viem-client.js",
+  "types": "dist/index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc && vite build"
+  },
+  "devDependencies": {
+    "dprint": "^0.35.3",
+    "typescript": "^4.9.3",
+    "vite": "^4.2.0",
+    "vite-plugin-dts": "^2.1.0"
+  },
+  "dependencies": {
+    "viem": "^0.1.21"
+  }
+}

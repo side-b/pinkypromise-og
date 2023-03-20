@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "pnpm build-viem-client && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build-viem-client": "cd viem-client && pnpm build"
   },
   "dependencies": {
     "@types/node": "18.15.3",
@@ -19,9 +20,10 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "5.0.2",
-    "viem": "^0.1.21"
+    "viem-client": "link:viem-client"
   },
   "devDependencies": {
-    "dprint": "^0.35.3"
+    "dprint": "^0.35.3",
+    "esbuild": "^0.17.12"
   }
 }

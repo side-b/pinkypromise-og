@@ -2,8 +2,7 @@ import type { ColorId } from "../../lib/types";
 
 import { ImageResponse } from "@vercel/og";
 import { NextRequest } from "next/server";
-import { createPublicClient, http } from "viem";
-import { goerli } from "viem/chains";
+import { getClient } from "viem-client";
 
 import { PromiseCard } from "../../components/PromiseCard";
 import { PinkyPromiseAbi } from "../../lib/abis";
@@ -24,10 +23,7 @@ export const config = {
   runtime: "edge",
 };
 
-const client = createPublicClient({
-  chain: goerli,
-  transport: http(),
-});
+const client = getClient("goerli");
 
 // Note: Edge seems to require new URL() params to be static
 
