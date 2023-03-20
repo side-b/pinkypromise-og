@@ -61,9 +61,9 @@ async function fetchAsDataUri(url: URL, type: string) {
   return `data:${type};base64,${base64}`;
 }
 
-const errorResponse = new Response(
-  "Failed to generate the image",
-  { status: 500 },
+const notFoundResponse = new Response(
+  "Not found",
+  { status: 404 },
 );
 
 function getFullPromiseId(url: string) {
@@ -76,8 +76,7 @@ export default async function handler(req: NextRequest) {
   const fullPromiseId = getFullPromiseId(req.url);
 
   if (!fullPromiseId) {
-    console.log("1");
-    return errorResponse;
+    return notFoundResponse;
   }
 
   const [networkPrefix, promiseId] = fullPromiseId;
@@ -85,8 +84,7 @@ export default async function handler(req: NextRequest) {
   const chain = appChainFromPrefix(networkPrefix);
 
   if (!chain) {
-    console.log(2);
-    return errorResponse;
+    return notFoundResponse;
   }
 
   let contractRead;
@@ -98,8 +96,7 @@ export default async function handler(req: NextRequest) {
       args: [BigInt(promiseId)],
     });
   } catch (_) {
-    console.log(3);
-    return errorResponse;
+    return notFoundResponse;
   }
 
   const [
@@ -124,8 +121,7 @@ export default async function handler(req: NextRequest) {
   const tapeUrl = TAPES.get(color);
 
   if (!backgroundUrl || !tapeUrl) {
-    console.log(4);
-    return errorResponse;
+    return notFoundResponse;
   }
 
   const backgroundDataUri = await fetchAsDataUri(backgroundUrl, "image/png");
