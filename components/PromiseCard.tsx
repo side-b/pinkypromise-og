@@ -91,7 +91,7 @@ export function PromiseCard({
                   fontWeight: 600,
                 }}
               >
-                <strong>{formatPromiseState(promiseData.state)}</strong>
+                {formatPromiseState(promiseData.state)}
               </div>
             </div>
           </div>

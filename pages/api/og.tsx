@@ -29,10 +29,10 @@ const client = createPublicClient({
   transport: http(),
 });
 
+// Note: Edge seems to require new URL() params to be static
+
 const fetchingFonts = Promise.all(([
-  // Edge seems to require new URL() params to be static
   [new URL("../../assets/SpaceGrotesk-Regular.ttf", import.meta.url), 400],
-  [new URL("../../assets/SpaceGrotesk-SemiBold.ttf", import.meta.url), 600],
 ] as const).map(async ([url, weight]) => {
   const res = await fetch(url);
   const data = await res.arrayBuffer();
@@ -40,7 +40,6 @@ const fetchingFonts = Promise.all(([
 }));
 
 const BACKGROUNDS = new Map<ColorId, URL>([
-  // Edge seems to require new URL() params to be static
   ["pink", new URL("../../assets/pink.png", import.meta.url)],
   ["blue", new URL("../../assets/blue.png", import.meta.url)],
   ["red", new URL("../../assets/red.png", import.meta.url)],
@@ -48,7 +47,6 @@ const BACKGROUNDS = new Map<ColorId, URL>([
 ]);
 
 const TAPES = new Map<ColorId, URL>([
-  // Edge seems to require new URL() params to be static
   ["pink", new URL("../../assets/tape-pink.png", import.meta.url)],
   ["blue", new URL("../../assets/tape-blue.png", import.meta.url)],
   ["red", new URL("../../assets/tape-red.png", import.meta.url)],
