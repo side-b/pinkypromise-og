@@ -67,7 +67,7 @@ export function PromiseCard({
                 style={{
                   display: "flex",
                   fontSize: 18,
-                  fontWeight: 800,
+                  fontWeight: 600,
                 }}
               >
                 {promiseId}
@@ -88,7 +88,7 @@ export function PromiseCard({
                 style={{
                   display: "flex",
                   fontSize: 18,
-                  fontWeight: 800,
+                  fontWeight: 600,
                 }}
               >
                 <strong>{formatPromiseState(promiseData.state)}</strong>

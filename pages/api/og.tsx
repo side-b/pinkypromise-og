@@ -33,7 +33,6 @@ const fetchingFonts = Promise.all(([
   // Edge seems to require new URL() params to be static
   [new URL("../../assets/SpaceGrotesk-Regular.ttf", import.meta.url), 400],
   [new URL("../../assets/SpaceGrotesk-SemiBold.ttf", import.meta.url), 600],
-  [new URL("../../assets/SpaceGrotesk-Bold.ttf", import.meta.url), 800],
 ] as const).map(async ([url, weight]) => {
   const res = await fetch(url);
   const data = await res.arrayBuffer();
