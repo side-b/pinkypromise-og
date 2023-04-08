@@ -61,10 +61,7 @@ async function fetchAsDataUri(url: URL, type: string) {
   return `data:${type};base64,${base64}`;
 }
 
-const notFoundResponse = new Response(
-  "Not found",
-  { status: 404 },
-);
+const notFoundResponse = new Response("Not found", { status: 404 });
 
 function getFullPromiseId(url: string) {
   const { searchParams } = new URL(url);
