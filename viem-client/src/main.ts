@@ -1,17 +1,13 @@
 import { createPublicClient, http } from "viem";
-import { arbitrum, goerli, mainnet, optimism, polygon } from "viem/chains";
+import { goerli, mainnet, polygon } from "viem/chains";
 
 const chains = {
-  arbitrum,
-  goerli,
-  mainnet,
-  optimism,
-  polygon,
-};
+  goerli: [goerli, http(process.env.VITE_RPC_URL_GOERLI)],
+  polygon: [polygon, http(process.env.VITE_RPC_URL_POLYGON)],
+  mainnet: [mainnet, http(process.env.VITE_RPC_URL_MAINNET)],
+} as const;
 
-export function getClient(chain: keyof typeof chains) {
-  return createPublicClient({
-    chain: chains[chain],
-    transport: http(),
-  });
+export function getClient(chainId: keyof typeof chains) {
+  const [chain, transport] = chains[chainId];
+  return createPublicClient({ chain, transport });
 }
