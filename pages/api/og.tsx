@@ -1,4 +1,4 @@
-import type { ColorId } from "../../lib/types";
+import type { ColorId, NetworkName } from "../../lib/types";
 
 import { ImageResponse } from "@vercel/og";
 import { NextRequest } from "next/server";
@@ -23,7 +23,11 @@ export const config = {
   runtime: "edge",
 };
 
-const client = getClient("goerli");
+const clients: Partial<Record<NetworkName, ReturnType<typeof getClient>>> = {
+  goerli: getClient("goerli"),
+  mainnet: getClient("mainnet"),
+  polygon: getClient("polygon"),
+};
 
 // Note: Edge seems to require new URL() params to be static
 
@@ -86,6 +90,10 @@ export default async function handler(req: NextRequest) {
 
   let contractRead;
   try {
+    const client = clients[chain.name];
+    if (!client) {
+      return notFoundResponse;
+    }
     contractRead = await client.readContract({
       address: NETWORKS[chain.name]?.contract ?? "0x",
       abi: PinkyPromiseAbi,
